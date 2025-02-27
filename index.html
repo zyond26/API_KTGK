@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goods Management</title>
+    <script>
+        async function fetchGoods() {
+            let response = await fetch("http://localhost:5000/api/HangHoa");
+            let goods = await response.json();
+            let table = document.getElementById("goods-table");
+            table.innerHTML = "<tr><th>Mã</th><th>Tên</th><th>Số lượng</th></tr>";
+            goods.forEach(good => {
+                let row = `<tr><td>${good.maHangHoa}</td><td>${good.tenHangHoa}</td><td>${good.soLuong}</td></tr>`;
+                table.innerHTML += row;
+            });
+        }
+        window.onload = fetchGoods;
+    </script>
+</head>
+<body>
+    <h1>Danh sách hàng hóa</h1>
+    <table id="goods-table" border="1"></table>
+</body>
+</html>
